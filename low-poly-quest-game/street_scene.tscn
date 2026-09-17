@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://u1b058tukija"]
+
+[ext_resource type="Script" uid="uid://n361cpoj8pmm" path="res://character_body_3d.gd" id="1_00eth"]
+[ext_resource type="Script" uid="uid://f51e778ufbwr" path="res://moving-ground.gd" id="1_xfw5b"]
+[ext_resource type="PackedScene" uid="uid://dft4ylwjyhobm" path="res://assets/world/videogame_cylinder_road.glb" id="3_v0kx1"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_00eth"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_xfw5b"]
+sky_material = SubResource("ProceduralSkyMaterial_00eth")
+
+[sub_resource type="Environment" id="Environment_v0kx1"]
+background_mode = 2
+sky = SubResource("Sky_xfw5b")
+glow_enabled = true
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_v0kx1"]
+height = 41.364
+radius = 40.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_vxbe5"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vxbe5"]
+height = 5.5
+radius = 40.9
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_pqa67"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_a1vod"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vxbe5"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vxbe5"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c1ijd"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_c1ijd"]
+
+[node name="Node3D" type="Node3D" unique_id=871297987]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=233595340]
+environment = SubResource("Environment_v0kx1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=874032906]
+transform = Transform3D(-1, -3.771617e-08, 5.3882975e-08, 1.1431656e-08, 0.70710665, 0.70710677, -6.4770376e-08, 0.70710677, -0.70710665, 0, 9, -9)
+shadow_enabled = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1918918546]
+script = ExtResource("1_xfw5b")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=122826540]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_v0kx1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D" unique_id=1445346467]
+transform = Transform3D(1.0000017, -2.6645353e-14, 0, 5.684342e-14, 1, 0, 0, 0, 1.0000002, 0, -0.0011303512, -0.0020703364)
+visible = false
+mesh = SubResource("CylinderMesh_vxbe5")
+
+[node name="videogame_cylinder_road" parent="StaticBody3D/CollisionShape3D" unique_id=1593197405 instance=ExtResource("3_v0kx1")]
+transform = Transform3D(-2.447838e-07, 5.6000004, -1.7770515e-07, -8.4703295e-22, -2.4478373e-07, -4.06542, -5.6000004, -2.447838e-07, 7.7677385e-15, 1.3350641e-08, -4.0592385e-15, 0)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" unique_id=1197127856]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -22.706371, 2.7032605e-08, 0)
+shape = SubResource("CylinderShape3D_vxbe5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D2" unique_id=195764462]
+transform = Transform3D(0.99999994, 0, 0, 2.2737368e-13, 1.0000001, 0, 0, 0, 0.99999994, 3.2132075e-10, 0.5670297, 0)
+visible = false
+mesh = SubResource("CylinderMesh_pqa67")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="StaticBody3D" unique_id=1958501677]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 22.7498, 2.7032605e-08, 0)
+shape = SubResource("CylinderShape3D_vxbe5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D3" unique_id=154973071]
+transform = Transform3D(0.99999994, 0, 0, 2.2737368e-13, 1.0000001, 0, 0, 0, 0.99999994, -3.2132053e-10, -0.5670297, 0)
+visible = false
+mesh = SubResource("CylinderMesh_a1vod")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1442652321 node_paths=PackedStringArray("cylinder_track")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 41.134, 0)
+script = ExtResource("1_00eth")
+cylinder_track = NodePath("../StaticBody3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=564094013]
+shape = SubResource("CapsuleShape3D_vxbe5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/CollisionShape3D" unique_id=530940185]
+mesh = SubResource("CapsuleMesh_vxbe5")
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D" unique_id=2092527440]
+transform = Transform3D(1, 0, 0, 0, 0.85086197, 0.5253893, 0, -0.5253893, 0.85086197, 0, 2.0674438, 3.356153)
+fov = 74.0
+
+[node name="ObstacleArea" type="Area3D" parent="CharacterBody3D" unique_id=1456712222]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/ObstacleArea" unique_id=1961395379]
+shape = SubResource("CapsuleShape3D_c1ijd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2058749123]
+transform = Transform3D(10.269118, 0, 0, 0, 10.269118, 0, 0, 0, 10.269118, 0, 43.637653, -50.485497)
+mesh = SubResource("CylinderMesh_c1ijd")
